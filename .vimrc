@@ -28,7 +28,6 @@
 "
 "
 "
-"
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
@@ -53,6 +52,10 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'derekwyatt/vim-fswitch'
 Plugin 'vim-scripts/indexer.tar.gz'
 Plugin 'vim-scripts/taglist.vim'
+Plugin 'mbbill/code_complete'
+Plugin 'vimplugin/project.vim'
+"
+
 " Plugin 'tpope/vim-rails.git'
 " The sparkup vim script is in a subdirectory of this repo called vim.
 " Pass the path to set the runtimepath properly.
