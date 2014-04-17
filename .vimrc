@@ -1,3 +1,31 @@
+"
+" How to use git
+"
+" //clone
+" git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+"
+" //add new file
+" cd ~/Hello-World
+" git init
+" git add README 
+" git commit -m 'first commit' 
+" git remote add origin https://github.com/username/Hello-World.git
+" # Creates a remote named "origin" pointing at your GitHub repository
+" git push origin master"
+"
+"
+"
+"
+"
+"
+"
+"
+"
+"
+"
+"
+"
+"
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
