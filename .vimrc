@@ -13,8 +13,11 @@
 " # Creates a remote named "origin" pointing at your GitHub repository
 " git push origin master"
 "
-"
-"
+" //check in changed files
+" git status
+" git add <filename>
+" git commit -m "xxx"
+" git push
 "
 "
 "
