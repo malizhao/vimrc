@@ -19,10 +19,9 @@
 " git commit -m "xxx"
 " git push
 "
-"
-"
-"
-"
+" // update
+" git fetch
+" git merge
 "
 "
 "
