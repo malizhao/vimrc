@@ -48,7 +48,6 @@ Plugin 'Lokaltog/vim-easymotion'
 Plugin 'vim-scripts/supertab.git'
 Plugin 'altercation/vim-colors-solarized.git'
 Plugin 'scrooloose/nerdtree'
-Plugin 'derekwyatt/vim-fswitch'
 Plugin 'vim-scripts/indexer.tar.gz'
 Plugin 'vim-scripts/taglist.vim'
 Plugin 'mbbill/code_complete'
@@ -65,7 +64,6 @@ Plugin 'vimplugin/project.vim'
 Plugin 'FuzzyFinder'
 Plugin 'L9'
 Plugin 'genutils'
-Plugin 'FSwitch'
 Plugin 'vimprj'
 Plugin 'Dfrankutil'
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -163,8 +161,25 @@ map ,<CR> i<CR><ESC>
 "add blank(space) before and after a word
 map ,b i<SPACE><ESC>ea<SPACE><ESC>
 
-set tags+=tags;/
+"set tags+=tags;/
 filetype plugin on
+
+" nmap ,a		:find %:t:r.c<CR>
+" nmap ,as 	:sf %:t:r.h<CR>
+
+map ,f :FufCoverageFile<CR>
+
+
+function! SwitchSourceHeader()
+  "update!
+  if (expand ("%:e") == "c")
+    find %:t:r.h
+  else
+    find %:t:r.c
+  endif
+endfunction
+
+nmap ,a :call SwitchSourceHeader()<CR>
 
 
 
@@ -172,25 +187,40 @@ filetype plugin on
 " Config plugin
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+
+
+" 
+"
 " configure super tab
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:SuperTabDefaultCompletionType = ""
 
 
+
+" 
+"
 " configure colors-solarized
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 syntax enable
 set background=dark
 "set background=light
 colorscheme solarized
+let g:solarized_termcolors=256
 
 
+
+" 
+"
 " configure taglist and nerktree
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 map <F7> :TlistToggle<CR>:NERDTreeToggle<CR>
 let g:NERDTreeWinPos = "right"
 
 
+
+
+" 
+"
 " configure easy montion
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -216,3 +246,22 @@ let g:EasyMotion_smartcase = 1
 
 
 
+
+" 
+"
+" 
+"
+" control to toggle full screen mode
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! ToggleGUICruft()
+  if &guioptions=='i'
+    exec('set guioptions=imTrL')
+  else
+    exec('set guioptions=im')
+  endif
+endfunction
+
+map <F11> <Esc>:call ToggleGUICruft()<cr>
+
+" by default, hide gui menus
+set guioptions=im
