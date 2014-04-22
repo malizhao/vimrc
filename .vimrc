@@ -61,7 +61,7 @@ Plugin 'vimplugin/project.vim'
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " scripts from http://vim-scripts.org/vim/scripts.html
-Plugin 'FuzzyFinder'
+" Plugin 'FuzzyFinder'
 Plugin 'L9'
 Plugin 'genutils'
 Plugin 'vimprj'
@@ -164,12 +164,6 @@ map ,b i<SPACE><ESC>ea<SPACE><ESC>
 "set tags+=tags;/
 filetype plugin on
 
-" nmap ,a		:find %:t:r.c<CR>
-" nmap ,as 	:sf %:t:r.h<CR>
-
-map ,f :FufCoverageFile<CR>
-
-
 function! SwitchSourceHeader()
   "update!
   if (expand ("%:e") == "c")
@@ -180,6 +174,64 @@ function! SwitchSourceHeader()
 endfunction
 
 nmap ,a :call SwitchSourceHeader()<CR>
+
+
+
+let g:FindIgnore = ['\.d', '\.o', '\.swp', '\.pyc', '\.class', '\.git', '\.svn']
+" Find file in current directory and edit it.
+function! Find(...)
+    let g:pathlist=&path
+	let g:pathlist=substitute(g:pathlist, ",", " ", "g")
+    let g:query=a:1
+
+    if !exists("g:FindIgnore")
+        let g:ignore = ""
+    else
+        let g:ignore = " | egrep -v '".join(g:FindIgnore, "|")."'"
+    endif
+
+    let g:args="find ".g:pathlist." -maxdepth 1 -type f -iname '*".g:query."*'".g:ignore
+    let g:list=system(g:args)
+    let l:num=strlen(substitute(g:list, "[^\n]", "", "g"))
+
+    if l:num < 1
+        echo "'".g:query."' not found"
+        return
+    endif
+
+    if l:num == 1
+        exe "open " . substitute(g:list, "\n", "", "g")
+    else
+        let tmpfile = tempname()
+        exe "redir! > " . tmpfile
+        silent echon g:list
+        redir END
+        let old_efm = &efm
+        set efm=%f
+
+        if exists(":cgetfile")
+            execute "silent! cgetfile " . tmpfile
+        else
+            execute "silent! cfile " . tmpfile
+        endif
+
+        let &efm = old_efm
+
+        " Open the quickfix window below the current window
+        botright copen
+
+        call delete(tmpfile)
+    endif
+endfunction
+
+command! -nargs=* Find :call Find(<f-args>)
+
+
+" nmap ,a		:find %:t:r.c<CR>
+" nmap ,as 	:sf %:t:r.h<CR>
+
+
+
 
 
 
@@ -265,3 +317,8 @@ map <F11> <Esc>:call ToggleGUICruft()<cr>
 
 " by default, hide gui menus
 set guioptions=im
+
+
+
+
+
