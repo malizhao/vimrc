@@ -46,13 +46,15 @@ Plugin 'gmarik/vundle'
 " scripts on GitHub repos
 Plugin 'tpope/vim-fugitive'
 Plugin 'Lokaltog/vim-easymotion'
-Plugin 'vim-scripts/supertab.git'
+Plugin 'ervandew/supertab'
 Plugin 'altercation/vim-colors-solarized.git'
 Plugin 'scrooloose/nerdtree'
 Plugin 'vim-scripts/indexer.tar.gz'
 Plugin 'vim-scripts/taglist.vim'
 Plugin 'mbbill/code_complete'
 Plugin 'vimplugin/project.vim'
+"Plugin 'dkprice/vim-easygrep'
+Plugin 'mileszs/ack.vim'
 "
 
 " Plugin 'tpope/vim-rails.git'
@@ -231,6 +233,17 @@ command! -nargs=* Find :call Find(<f-args>)
 " nmap ,a		:find %:t:r.c<CR>
 " nmap ,as 	:sf %:t:r.h<CR>
 
+function! <sid>DoGrep1(pattern)
+	let dirs = {}                                                                                     
+	let g:pathdirs = split(&path, ",")                                                                
+	let g:filesToGrep = join(g:pathdirs, ' ')  
+
+	execute "Ack! -n --nomatlab --cpp ".a:pattern." ".g:filesToGrep
+endfunction
+
+
+command! -bang -nargs=* -complete=file DoGrep  call <sid>DoGrep1(<q-args>)
+map ,v  :DoGrep <C-R><C-W> <CR>
 
 
 
@@ -259,6 +272,19 @@ set background=dark
 "set background=light
 colorscheme solarized
 let g:solarized_termcolors=256
+
+
+
+
+
+"
+"
+"
+" Configure indexer
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:indexer_useSedWhenAppend = 1
+
+
 
 
 
@@ -296,6 +322,19 @@ let g:EasyMotion_smartcase = 1
 " JK motions: Line motions
 " map <Leader>j <Plug>(easymotion-j)
 " map <Leader>k <Plug>(easymotion-k)
+
+
+
+
+
+" 
+"
+" 
+"
+" control easy grep
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:EasyGrepWindowPosition="botright"
+let g:EasyGrepCommand=1
 
 
 
