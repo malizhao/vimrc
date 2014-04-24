@@ -180,21 +180,61 @@ nmap ,a :call SwitchSourceHeader()<CR>
 
 
 
-let g:FindIgnore = ['\.d', '\.o', '\.swp', '\.pyc', '\.class', '\.git', '\.svn']
+
+function! GetPathDirs()
+	let dirs = {}                                                                                     
+	let dirlist = []
+
+	let g:pathdirs = split(&path, ",")                                                                
+	for path in g:pathdirs
+
+		if path =="\." || path == "\.\." || path == " " || path == ""
+			continue
+		endif
+
+		let deldir = " "
+		let delpath = " " 
+		for dir in dirlist
+			if match(path, dir) > -1 
+				let delpath=path
+			endif
+
+			if match(dir, path) > -1
+				let deldir=dir
+			endif
+		endfor
+
+		if deldir !~ " "
+			call remove(dirlist, deldir)
+			call add(dirlist, path)
+		endif
+
+		if delpath =~ " "
+			call add(dirlist, path)
+		endif
+
+	endfor
+	let g:pathlist= join(dirlist, ' ')  
+	return g:pathlist 
+endfunction
+
+
+let g:Pattern= ['h', 'c', 'cpp', 'cxx', 'hpp', 'hxx']
+
 " Find file in current directory and edit it.
-function! Find(...)
+function! DoFindInPath(...)
     let g:pathlist=&path
 	let g:pathlist=substitute(g:pathlist, ",", " ", "g")
-    let g:query=a:1
+	let g:pathlist = GetPathDirs()
 
-    if !exists("g:FindIgnore")
-        let g:ignore = ""
-    else
-        let g:ignore = " | egrep -v '".join(g:FindIgnore, "|")."'"
-    endif
+    let g:query="'*".a:1."*\.[".join(g:Pattern,'|')."]' "
 
-    let g:args="find ".g:pathlist." -maxdepth 1 -type f -iname '*".g:query."*'".g:ignore
+	let options = " -path=./xt -prune -type f -iname "
+
+    let g:args="find -H ".g:pathlist.options.g:query
+
     let g:list=system(g:args)
+
     let l:num=strlen(substitute(g:list, "[^\n]", "", "g"))
 
     if l:num < 1
@@ -227,23 +267,18 @@ function! Find(...)
     endif
 endfunction
 
-command! -nargs=* Find :call Find(<f-args>)
+command! -nargs=* FindInPath :call DoFindInPath(<f-args>)
+map ,f  :FindInPath <C-R><C-W> <CR>
 
 
-" nmap ,a		:find %:t:r.c<CR>
-" nmap ,as 	:sf %:t:r.h<CR>
-
-function! <sid>DoGrep1(pattern)
-	let dirs = {}                                                                                     
-	let g:pathdirs = split(&path, ",")                                                                
-	let g:filesToGrep = join(g:pathdirs, ' ')  
-
-	execute "Ack! -n --nomatlab --cpp ".a:pattern." ".g:filesToGrep
+function! <sid>DoGrepInPath(pattern)
+	let g:filesToGrep = GetPathDirs()
+	execute "Ack! --ignore-dir=xt --nofollow --nomatlab --cc --make --cpp ".a:pattern." ".g:filesToGrep
 endfunction
 
 
-command! -bang -nargs=* -complete=file DoGrep  call <sid>DoGrep1(<q-args>)
-map ,v  :DoGrep <C-R><C-W> <CR>
+command! -bang -nargs=* -complete=file GrepInPath  call <sid>DoGrepInPath(<q-args>)
+map ,v  :GrepInPath <C-R><C-W> <CR>
 
 
 
@@ -273,6 +308,16 @@ set background=dark
 colorscheme solarized
 let g:solarized_termcolors=256
 
+
+
+
+" 
+"
+" configure taglist
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"let Tlist_Show_One_File = 1
+let Tlist_File_Fold_Auto_Close = 1
+let Tlist_Sort_Type = "name"
 
 
 
@@ -324,17 +369,6 @@ let g:EasyMotion_smartcase = 1
 " map <Leader>k <Plug>(easymotion-k)
 
 
-
-
-
-" 
-"
-" 
-"
-" control easy grep
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:EasyGrepWindowPosition="botright"
-let g:EasyGrepCommand=1
 
 
 
