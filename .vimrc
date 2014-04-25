@@ -219,7 +219,7 @@ function! GetPathDirs()
 endfunction
 
 
-let g:Pattern= ['h', 'c', 'cpp', 'cxx', 'hpp', 'hxx']
+let g:Pattern = ['h', 'c', 'cpp', 'cxx', 'hpp', 'hxx']
 
 " Find file in current directory and edit it.
 function! DoFindInPath(...)
@@ -227,9 +227,9 @@ function! DoFindInPath(...)
 	let g:pathlist=substitute(g:pathlist, ",", " ", "g")
 	let g:pathlist = GetPathDirs()
 
-    let g:query="'*".a:1."*\.[".join(g:Pattern,'|')."]' "
+    let g:query="\"*".a:1."*\.[".join(g:Pattern,'|')."]\""
 
-	let options = " -path=./xt -prune -type f -iname "
+	let options = " -path \"\./xt\" -prune -type f -iname "
 
     let g:args="find -H ".g:pathlist.options.g:query
 
