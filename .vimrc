@@ -219,6 +219,7 @@ function! GetPathDirs()
 endfunction
 
 
+
 let g:Pattern = ['h', 'c', 'cpp', 'cxx', 'hpp', 'hxx']
 
 " Find file in current directory and edit it.
