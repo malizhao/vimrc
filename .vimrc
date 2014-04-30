@@ -229,7 +229,7 @@ function! DoFindInPath(...)
 
     let g:query="\"*".a:1."*\.[".join(g:Pattern,'|')."]\""
 
-	let options = " -path \"\./xt\" -prune -type f -iname "
+	let options = " -type f -iname "
 
     let g:args="find -H ".g:pathlist.options.g:query
 
@@ -242,9 +242,9 @@ function! DoFindInPath(...)
         return
     endif
 
-    if l:num == 1
-        exe "open " . substitute(g:list, "\n", "", "g")
-    else
+    "if l:num == 1
+    "    exe "open " . substitute(g:list, "\n", "", "g")
+    "else
         let tmpfile = tempname()
         exe "redir! > " . tmpfile
         silent echon g:list
@@ -264,7 +264,7 @@ function! DoFindInPath(...)
         botright copen
 
         call delete(tmpfile)
-    endif
+   " endif
 endfunction
 
 command! -nargs=* FindInPath :call DoFindInPath(<f-args>)
