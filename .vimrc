@@ -330,6 +330,7 @@ let Tlist_Sort_Type = "name"
 " Configure indexer
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:indexer_useSedWhenAppend = 1
+let g:indexer_tagsDirname = "/tmp/marsma/indexer"
 
 
 
