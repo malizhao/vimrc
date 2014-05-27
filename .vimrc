@@ -25,6 +25,7 @@
 " git merge
 "
 "
+" You should first install perl ack, refer beyondgrep.com
 "
 "
 "
@@ -55,6 +56,7 @@ Plugin 'mbbill/code_complete'
 Plugin 'vimplugin/project.vim'
 "Plugin 'dkprice/vim-easygrep'
 Plugin 'mileszs/ack.vim'
+Plugin 'tyok/nerdtree-ack'
 "
 
 " Plugin 'tpope/vim-rails.git'
@@ -166,6 +168,7 @@ map ,b i<SPACE><ESC>ea<SPACE><ESC>
 
 "set tags+=tags;/
 filetype plugin on
+set backspace=2
 
 function! SwitchSourceHeader()
   "update!
