@@ -24,7 +24,6 @@
 " git fetch
 " git merge
 "
-"
 " You should first install perl ack, refer beyondgrep.com
 "
 "
