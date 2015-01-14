@@ -31,30 +31,69 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
+" alternatively, pass a path where Vundle should install plugins
+" let path = '~/some/path/here'
+" call vundle#rc(path)
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
-" alternatively, pass a path where Vundle should install plugins
-"let path = '~/some/path/here'
-"call vundle#rc(path)
 
 " let Vundle manage Vundle, required
 Plugin 'gmarik/vundle'
 
 " The following are examples of different formats supported.
 " Keep Plugin commands between here and filetype plugin indent on.
+" -----------------------------------------
 " scripts on GitHub repos
 Plugin 'tpope/vim-fugitive'
 Plugin 'Lokaltog/vim-easymotion'
-"Plugin 'ervandew/supertab'
 Plugin 'altercation/vim-colors-solarized.git'
 Plugin 'scrooloose/nerdtree'
 Plugin 'vim-scripts/indexer.tar.gz'
 Plugin 'vim-scripts/taglist.vim'
-"Plugin 'mbbill/code_complete'
 Plugin 'vimplugin/project.vim'
-"Plugin 'dkprice/vim-easygrep'
 Plugin 'mileszs/ack.vim'
+Plugin 'bling/vim-bufferline'
+Plugin 'kien/ctrlp.vim'
+
+
+
+":NeoCompleteEnable				*:NeoCompleteEnable*
+"		Validate neocomplete and initialize it.
+"		Warning: Existing cache disappears.
+"
+":NeoCompleteDisable				*:NeoCompleteDisable*
+"		Invalidate neocomplete and clean it up.
+"
+":NeoCompleteToggle				*:NeoCompleteToggle*
+"		Change the lock/unlock state of neocomplete.
+"		While neocomplete is in locking, you cannot use automatic
+"		completions.
+"		Note: This command also enables neocomplete if it is disabled.
+"
+Plugin 'Shougo/neocomplete.vim'
+Plugin 'bling/vim-airline'
+
+
+
+
+"## How to Use nerdtree-ack
+"
+"1. Open NERDtree
+"2. Point to a directory
+"3. Press `ms`
+"4. Enter search term (e.g. `control\ panel -i`)
+"5. Profit!
+"
+"## Features
+"
+"1. Doesn't change current open buffers! This feature is what necessitate the use of latest ack.vim
+"2. Uses ack.vim syntax:
+"    - Use `\ ` to write a space (e.g. `control\ panel`)
+"    - Or enclose the term in quotes (e.g. `"control panel"`)
+"    - The default behavior is case sensitive. Use `-i` params for case insensitive (e.g. `"control panel" -i`)
+"3. Uses ack.vim buffer behavior
+"
 Plugin 'tyok/nerdtree-ack'
 "
 
@@ -114,7 +153,6 @@ set nu
 set nocp
 set ruler
 set nowrap
-set tabstop=4
 set hlsearch
 set shiftwidth=4 
 set incsearch
@@ -122,7 +160,9 @@ set ignorecase
 set autoindent
 set fdm=syntax
 set nofoldenable
+set tabstop=4
 
+set guifont=Monaco:h14
 
 " Maps Alt-[h,j,k,l] to resizing a window split
 map <C-h> <C-w><
@@ -296,11 +336,22 @@ map ,v  :GrepInPath <C-R><C-W> <CR>
 
 " 
 "
-" configure super tab
+" configure airline
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:SuperTabDefaultCompletionType = ""
+let g:airline#extensions#default#layout = [
+      \ [ 'a', 'b', 'c' ],
+      \ [ 'x', 'y', 'z', 'warning' ]
+      \ ]
 
 
+" 
+"
+" configure vim bufferline
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:bufferline_echo = 0
+autocmd VimEnter *
+   \ let &statusline='%{bufferline#refresh_status()}'
+   \ .bufferline#get_status_string()
 
 " 
 "
@@ -332,7 +383,7 @@ let Tlist_Sort_Type = "name"
 " Configure indexer
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:indexer_useSedWhenAppend = 1
-let g:indexer_tagsDirname = "/tmp/marsma/indexer"
+let g:indexer_debugLogLevel = 3
 
 
 
@@ -346,6 +397,22 @@ map <F7> :TlistToggle<CR>:NERDTreeToggle<CR>
 let g:NERDTreeWinPos = "right"
 
 
+
+
+" 
+"
+" configure neocomplete
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Note: This option must set it in .vimrc(_vimrc).
+" NOT IN .gvimrc(_gvimrc)!
+" Disable AutoComplPop.
+let g:acp_enableAtStartup = 0
+" Use neocomplete.
+let g:neocomplete#enable_at_startup = 1
+" Use smartcase.
+let g:neocomplete#enable_smart_case = 1
+" Set minimum syntax keyword length.
+let g:neocomplete#sources#syntax#min_keyword_length = 3
 
 
 " 
