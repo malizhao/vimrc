@@ -200,6 +200,7 @@ map <S-Tab> :bnext<CR>
 
 "return command mode
 imap ,c <ESC>
+map  ,c <ESC>
 
 "save file
 imap ,w <ESC>:w<CR>
@@ -207,6 +208,10 @@ map ,w  :w<CR>
 
 " Add tab, then goto command mode
 map ,t  i<Tab><ESC>
+
+" Add hex edit shortcut
+map ,h  :%!xxd<CR>
+map ,hr :%!xxd -r<CR>
 
 " Copy and past
 map ,y  "yyiw
@@ -221,21 +226,26 @@ map ,gp  "+gP
 map ,{  <i{
 map ,}  >i{
 
+
+
 " subsititue
 map ,s  yiw:%s/\<<C-R>0\>/
 map ,<SPACE> i<SPACE><ESC> 
-map ,<CR> i<CR><ESC> 
+
 
 "add blank(space) before and after a word
 map ,b i<SPACE><ESC>ea<SPACE><ESC>
 
 " tag control
+" open in preview window
 map <C-[> <C-W>g}
+" close preview window
 map ,q  <C-W>z
 
 "set tags+=tags;/
 filetype plugin on
 set backspace=2
+
 
 function! SwitchSourceHeader()
   "update!
