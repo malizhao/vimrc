@@ -54,6 +54,31 @@ Plugin 'vim-scripts/taglist.vim'
 Plugin 'vimplugin/project.vim'
 Plugin 'mileszs/ack.vim'
 Plugin 'bling/vim-bufferline'
+Plugin 'scrooloose/syntastic'
+Plugin 'chrisbra/csv.vim'
+
+
+":NR      - Open the selected region in a new narrowed window
+":NW      - Open the current visual window in a new narrowed window
+":WidenRegion - (In the narrowed window) write the changes back to the original buffer.
+":NRV     - Open the narrowed window for the region that was last visually selected.
+":NUD     - (In a unified diff) open the selected diff in 2 Narrowed windows
+":NRP     - Mark a region for a Multi narrowed window
+":NRM     - Create a new Multi narrowed window (after :NRP)
+":NRS     - Enable Syncing the buffer content back (default on)
+":NRN     - Disable Syncing the buffer content back
+":NRL     - Reselect the last selected region and open it again in a narrowed window
+Plugin 'chrisbra/NrrwRgn'
+
+"Press <F5> to purge the cache for the current directory to get new files, remove deleted files and apply new ignore options.
+"Press <c-f> and <c-b> to cycle between modes.
+"Press <c-d> to switch to filename only search instead of full path.
+"Press <c-r> to switch to regexp mode.
+"Use <c-j>, <c-k> or the arrow keys to navigate the result list.
+"Use <c-t> or <c-v>, <c-x> to open the selected entry in a new tab or in a new split.
+"Use <c-n>, <c-p> to select the next/previous string in the prompt's history.
+"Use <c-y> to create a new file and its parent directories.
+"Use <c-z> to mark/unmark multiple files and <c-o> to open them.
 Plugin 'kien/ctrlp.vim'
 
 
@@ -162,7 +187,7 @@ set fdm=syntax
 set nofoldenable
 set tabstop=4
 
-set guifont=Monaco:h14
+set guifont=Monaco:h12
 
 " Maps Alt-[h,j,k,l] to resizing a window split
 map <C-h> <C-w><
@@ -179,7 +204,6 @@ imap ,c <ESC>
 "save file
 imap ,w <ESC>:w<CR>
 map ,w  :w<CR>
-map ,q  :qall<CR>
 
 " Add tab, then goto command mode
 map ,t  i<Tab><ESC>
@@ -204,6 +228,10 @@ map ,<CR> i<CR><ESC>
 
 "add blank(space) before and after a word
 map ,b i<SPACE><ESC>ea<SPACE><ESC>
+
+" tag control
+map <C-[> <C-W>g}
+map ,q  <C-W>z
 
 "set tags+=tags;/
 filetype plugin on
@@ -342,16 +370,18 @@ let g:airline#extensions#default#layout = [
       \ [ 'a', 'b', 'c' ],
       \ [ 'x', 'y', 'z', 'warning' ]
       \ ]
+let g:airline#extensions#whitespace#checks = [ ]
+let g:airline#extensions#bufferline#enabled = 0
 
 
 " 
 "
 " configure vim bufferline
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:bufferline_echo = 0
-autocmd VimEnter *
-   \ let &statusline='%{bufferline#refresh_status()}'
-   \ .bufferline#get_status_string()
+"let g:bufferline_echo = 0
+"autocmd VimEnter *
+"   \ let &statusline='%{bufferline#refresh_status()}'
+"   \ .bufferline#get_status_string()
 
 " 
 "
@@ -451,17 +481,17 @@ let g:EasyMotion_smartcase = 1
 "
 " control to toggle full screen mode
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! ToggleGUICruft()
-  if &guioptions=='i'
-    exec('set guioptions=imTrL')
-  else
-    exec('set guioptions=im')
-  endif
-endfunction
-
-map <F11> <Esc>:call ToggleGUICruft()<cr>
-
-" by default, hide gui menus
+"function! ToggleGUICruft()
+"  if &guioptions=='i'
+"    exec('set guioptions=imTrL')
+"  else
+"    exec('set guioptions=im')
+"  endif
+"endfunction
+"
+"map <F11> <Esc>:call ToggleGUICruft()<cr>
+"
+"" by default, hide gui menus
 set guioptions=im
 
 
