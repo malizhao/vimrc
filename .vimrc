@@ -56,7 +56,8 @@ Plugin 'mileszs/ack.vim'
 Plugin 'bling/vim-bufferline'
 Plugin 'scrooloose/syntastic'
 Plugin 'chrisbra/csv.vim'
-
+Plugin 'vim-scripts/lookupfile'
+Plugin 'klen/python-mode'
 
 ":NR      - Open the selected region in a new narrowed window
 ":NW      - Open the current visual window in a new narrowed window
@@ -371,15 +372,22 @@ map ,v  :GrepInPath <C-R><C-W> <CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
+" 
+"
+" configure ctrlp
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:ctrlp_extensions = ['tag', 'dir']
+let g:ctrlp_cmd = 'CtrlPTag'
+let g:ctrlp_match_window = 'results:100'
 
 " 
 "
 " configure airline
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:airline#extensions#default#layout = [
-      \ [ 'a', 'b', 'c' ],
-      \ [ 'x', 'y', 'z', 'warning' ]
-      \ ]
+"let g:airline#extensions#default#layout = [
+"      \ [ 'a', 'b', 'c' ],
+"      \ [ 'x', 'y', 'z', 'warning' ]
+"      \ ]
 let g:airline#extensions#whitespace#checks = [ ]
 let g:airline#extensions#bufferline#enabled = 0
 
@@ -405,7 +413,24 @@ let g:solarized_termcolors=256
 
 
 
+" 
+"
+" configure python_mode
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:pymode_lint_checkers = ['pyflakes', 'mccabe'] 
 
+
+
+" 
+"
+" configure syntastic
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:syntastic_mode_map = {
+        \ "mode": "active",
+        \ "active_filetypes": [],
+        \ "passive_filetypes": ["py"] }
+
+let g:syntastic_quiet_messages = { "regex" : 'file not found' }
 " 
 "
 " configure taglist
