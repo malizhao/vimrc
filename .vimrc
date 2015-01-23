@@ -188,7 +188,7 @@ set fdm=syntax
 set nofoldenable
 set tabstop=4
 
-set guifont=Monaco:h12
+set guifont=Monaco:h14
 
 " Maps Alt-[h,j,k,l] to resizing a window split
 map <C-h> <C-w><
@@ -211,8 +211,8 @@ map ,w  :w<CR>
 map ,t  i<Tab><ESC>
 
 " Add hex edit shortcut
-map ,h  :%!xxd<CR>
-map ,hr :%!xxd -r<CR>
+map ,x  :%!xxd<CR>
+map ,xr :%!xxd -r<CR>
 
 " Copy and past
 map ,y  "yyiw
