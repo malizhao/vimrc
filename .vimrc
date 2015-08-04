@@ -406,10 +406,17 @@ let g:airline#extensions#bufferline#enabled = 0
 " configure colors-solarized
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 syntax enable
-set background=dark
-"set background=light
-colorscheme solarized
-let g:solarized_termcolors=256
+
+if has("gui_running")
+  " GUI is running or is about to start.
+	colorscheme solarized
+	set background=dark
+	"set background=light
+	"let g:solarized_termcolors=256
+else
+  " This is console Vim.
+endif
+
 
 
 
