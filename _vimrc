@@ -43,8 +43,8 @@ filetype off                  " required
 "set rtp+=~/.vim/bundle/Vundle.vim
 "call vundle#begin()
 " windows
-set rtp+=$VIM/vimfiles/plugin/bundle/Vundle.vim/
-call vundle#begin('$VIM/vimfiles/plugin/bundle/')
+set rtp+=~/vimfiles/plugin/bundle/Vundle.vim/
+call vundle#begin('~/vimfiles/plugin/bundle/')
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
@@ -769,6 +769,7 @@ let g:EasyMotion_smartcase = 1
 "
 "" by default, hide gui menus
 set guioptions=im
+
 
 
 
