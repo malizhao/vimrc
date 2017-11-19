@@ -1,30 +1,8 @@
-
-"
-":
-" How to use git
-"
-" //clone
+" First, clone vundle
 " git clone https://github.com//VundleVim/Vundle.vim.git ~/.vim/bundle/vundle
 " or
 " git clone https://github.com/VundleVim/Vundle.vim.git bundle
-" //add new file
-" cd ~/Hello-World
-" git init
-" git add README 
-" git commit -m 'first commit' 
-" git remote add origin https://github.com/username/Hello-World.git
-" # Creates a remote named "origin" pointing at your GitHub repository
-" git push origin master"
 "
-" //check in changed files
-" git status
-" git add <filename>
-" git commit -m "xxx"
-" git push
-"
-" // update
-" git fetch
-" git merge
 "
 " You should first install perl ack, refer beyondgrep.com
 " to install choco, do this in power shell: Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
@@ -36,6 +14,7 @@
 "
 "
 "
+
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
@@ -43,8 +22,10 @@ filetype off                  " required
 "set rtp+=~/.vim/bundle/Vundle.vim
 "call vundle#begin()
 " windows
-set rtp+=~/vimfiles/plugin/bundle/Vundle.vim/
-call vundle#begin('~/vimfiles/plugin/bundle/')
+set rtp+=$HOME/.vim/bundle/Vundle.vim/
+set rtp+=$HOME/.vim/
+set rtp+=$HOME/.vim/bundle/
+call vundle#begin('$HOME/.vim/bundle/')
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
@@ -54,8 +35,7 @@ Plugin 'VundleVim/Vundle.vim'
 " -----------------------------------------
 " scripts on GitHub repos
 Plugin 'tpope/vim-fugitive'
-Plugin 'Lokaltog/vim-easymotion'
-Plugin 'altercation/vim-colors-solarized.git'
+Plugin 'easymotion/vim-easymotion'
 Plugin 'scrooloose/nerdtree'
 Plugin 'ludovicchabant/vim-gutentags'
 Plugin 'vim-scripts/taglist.vim'
@@ -277,9 +257,6 @@ Plugin 'vim-scripts/taglist.vim'
 
 Plugin 'mileszs/ack.vim'
 Plugin 'bling/vim-bufferline'
-Plugin 'scrooloose/syntastic'
-Plugin 'chrisbra/csv.vim'
-Plugin 'vim-scripts/lookupfile'
 Plugin 'klen/python-mode'
 
 "Comment stuff out. Use gcc to comment out a line (takes a count), 
@@ -335,9 +312,6 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'Shougo/neocomplete.vim'
 Plugin 'bling/vim-airline'
 
-
-
-
 "## How to Use nerdtree-ack
 "
 "1. Open NERDtree
@@ -364,13 +338,8 @@ Plugin 'tyok/nerdtree-ack'
 " Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" scripts from http://vim-scripts.org/vim/scripts.html
-" Plugin 'FuzzyFinder'
-Plugin 'L9'
-Plugin 'genutils'
-Plugin 'Dfrankutil'
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+call vundle#end()
 
 " scripts not on GitHub
 " Plugin 'git://git.wincent.com/command-t.git'
@@ -422,7 +391,7 @@ set fdm=syntax
 set nofoldenable
 set tabstop=4
 
-set guifont=Monaco:h14
+"set guifont=Monaco:h14
 
 " Maps Alt-[h,j,k,l] to resizing a window split
 map <C-h> <C-w><
@@ -635,23 +604,6 @@ let g:airline#extensions#bufferline#enabled = 0
 "   \ let &statusline='%{bufferline#refresh_status()}'
 "   \ .bufferline#get_status_string()
 
-" 
-"
-" configure colors-solarized
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-syntax enable
-
-if has("gui_running")
-  " GUI is running or is about to start.
-	colorscheme solarized
-	set background=dark
-	"set background=light
-	"let g:solarized_termcolors=256
-else
-  " This is console Vim.
-endif
-
-
 
 
 " 
@@ -769,6 +721,7 @@ let g:EasyMotion_smartcase = 1
 "
 "" by default, hide gui menus
 set guioptions=im
+
 
 
 
