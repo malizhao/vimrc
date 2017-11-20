@@ -39,6 +39,7 @@ Plugin 'easymotion/vim-easymotion'
 Plugin 'scrooloose/nerdtree'
 Plugin 'ludovicchabant/vim-gutentags'
 Plugin 'vim-scripts/taglist.vim'
+Plugin 'altercation/vim-colors-solarized'
 "
 "
 "Usage: ack [OPTION]... PATTERN [FILES OR DIRECTORIES]
@@ -702,28 +703,13 @@ let g:EasyMotion_smartcase = 1
 
 
 
-
-" 
-"
-" 
-"
-" control to toggle full screen mode
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"function! ToggleGUICruft()
-"  if &guioptions=='i'
-"    exec('set guioptions=imTrL')
-"  else
-"    exec('set guioptions=im')
-"  endif
-"endfunction
-"
-"map <F11> <Esc>:call ToggleGUICruft()<cr>
-"
 "" by default, hide gui menus
 set guioptions=im
 
 
-
+syntax enable
+set background=dark
+colorscheme solarized
 
 
 
