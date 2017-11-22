@@ -1,30 +1,8 @@
-
-"
-":
-" How to use git
-"
-" //clone
+" First, clone vundle
 " git clone https://github.com//VundleVim/Vundle.vim.git ~/.vim/bundle/vundle
 " or
 " git clone https://github.com/VundleVim/Vundle.vim.git bundle
-" //add new file
-" cd ~/Hello-World
-" git init
-" git add README 
-" git commit -m 'first commit' 
-" git remote add origin https://github.com/username/Hello-World.git
-" # Creates a remote named "origin" pointing at your GitHub repository
-" git push origin master"
 "
-" //check in changed files
-" git status
-" git add <filename>
-" git commit -m "xxx"
-" git push
-"
-" // update
-" git fetch
-" git merge
 "
 " You should first install perl ack, refer beyondgrep.com
 " to install choco, do this in power shell: Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
@@ -40,11 +18,11 @@ set nocompatible              " be iMproved, required
 filetype off                  " required
 
 " linux
-"set rtp+=~/.vim/bundle/Vundle.vim
-"call vundle#begin()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 " windows
-set rtp+=$VIM/vimfiles/plugin/bundle/Vundle.vim/
-call vundle#begin('$VIM/vimfiles/plugin/bundle/')
+"set rtp+=$HOME/.vim/bundle/Vundle.vim/
+"call vundle#begin('$HOME/.vim/bundle/Vundle.vim/')
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
@@ -53,6 +31,24 @@ Plugin 'VundleVim/Vundle.vim'
 " Keep Plugin commands between here and filetype plugin indent on.
 " -----------------------------------------
 " scripts on GitHub repos
+
+"I'm not going to lie to you; fugitive.vim may very well be the best Git wrapper of all time. Check out these features:
+"View any blob, tree, commit, or tag in the repository with :Gedit (and :Gsplit, :Gvsplit, :Gtabedit, ...). 
+"Edit a file in the index and write to it to stage the changes. Use :Gdiff to bring up the staged version of 
+"the file side by side with the working tree version and use Vim's diff handling capabilities to stage a subset of the file's changes.
+"Bring up the output of git status with :Gstatus. Press - to add/reset a file's changes, or p to add/reset --patch. And guess what :Gcommit does!
+":Gblame brings up an interactive vertical split with git blame output. Press enter on a line to edit the commit where the line changed, 
+"or o to open it in a split. When you're done, use :Gedit in the historic buffer to go back to the work tree version.
+":Gmove does a git mv on a file and simultaneously renames the buffer. :Gdelete does a git rm on a file and simultaneously deletes the buffer.
+"Use :Ggrep to search the work tree (or any arbitrary commit) with git grep, skipping over that which is not tracked in the repository. 
+":Glog loads all previous revisions of a file into the quickfix list so you can iterate over them and watch the file evolve!
+":Gread is a variant of git checkout -- filename that operates on the buffer rather than the filename. This means you can use u 
+"to undo it and you never get any warnings about the file changing outside Vim. :Gwrite writes to both the work tree and index 
+"versions of a file, making it like git add when called from a work tree file and like git checkout when called from the index or a blob in history.
+"Use :Gbrowse to open the current file on the web front-end of your favorite hosting provider, with optional line range 
+"(try it in visual mode!). Built-in support is provided for git instaweb, and plugins are available for popular providers such as GitHub, GitLab, and Bitbucket.
+"Add %{fugitive#statusline()} to 'statusline' to get an indicator with the current branch in (surprise!) your statusline.
+"Last but not least, there's :Git for running any arbitrary command, and Git! to open the output of a command in a temp file.
 Plugin 'tpope/vim-fugitive'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'altercation/vim-colors-solarized.git'
@@ -206,80 +202,9 @@ Plugin 'vim-scripts/taglist.vim'
 "specify a file type with the --type=TYPE format, or the --TYPE
 "format.  For example, both --type=perl and --perl work.
 "
-"Note that some extensions may appear in multiple types.  For example,
-".pod files are both Perl and Parrot.
-"
-"    --[no]actionscript .as .mxml
-"    --[no]ada          .ada .adb .ads
-"    --[no]asm          .asm .s
-"    --[no]asp          .asp
-"    --[no]aspx         .master .ascx .asmx .aspx .svc
-"    --[no]batch        .bat .cmd
-"    --[no]cc           .c .h .xs
-"    --[no]cfmx         .cfc .cfm .cfml
-"    --[no]clojure      .clj
-"    --[no]cmake        CMakeLists.txt; .cmake
-"    --[no]coffeescript .coffee
-"    --[no]cpp          .cpp .cc .cxx .m .hpp .hh .h .hxx
-"    --[no]csharp       .cs
-"    --[no]css          .css
-"    --[no]dart         .dart
-"    --[no]delphi       .pas .int .dfm .nfm .dof .dpk .dproj .groupproj .bdsgroup .bdsproj
-"    --[no]elisp        .el
-"    --[no]elixir       .ex .exs
-"    --[no]erlang       .erl .hrl
-"    --[no]fortran      .f .f77 .f90 .f95 .f03 .for .ftn .fpp
-"    --[no]go           .go
-"    --[no]groovy       .groovy .gtmpl .gpp .grunit .gradle
-"    --[no]haskell      .hs .lhs
-"    --[no]hh           .h
-"    --[no]html         .htm .html
-"    --[no]java         .java .properties
-"    --[no]js           .js
-"    --[no]json         .json
-"    --[no]jsp          .jsp .jspx .jhtm .jhtml
-"    --[no]less         .less
-"    --[no]lisp         .lisp .lsp
-"    --[no]lua          .lua; first line matches /^#!.*\blua(jit)?/
-"    --[no]make         .mk; .mak; makefile; Makefile; GNUmakefile
-"    --[no]matlab       .m
-"    --[no]md           .mkd; .md
-"    --[no]objc         .m .h
-"    --[no]objcpp       .mm .h
-"    --[no]ocaml        .ml .mli
-"    --[no]parrot       .pir .pasm .pmc .ops .pod .pg .tg
-"    --[no]perl         .pl .pm .pod .t .psgi; first line matches /^#!.*\bperl/
-"    --[no]perltest     .t
-"    --[no]php          .php .phpt .php3 .php4 .php5 .phtml; first line matches /^#!.*\bphp/
-"    --[no]plone        .pt .cpt .metadata .cpy .py
-"    --[no]pmc          .pmc
-"    --[no]python       .py; first line matches /^#!.*\bpython/
-"    --[no]rake         Rakefile
-"    --[no]rr           .R
-"    --[no]ruby         .rb .rhtml .rjs .rxml .erb .rake .spec; Rakefile; first line matches /^#!.*\bruby/
-"    --[no]rust         .rs
-"    --[no]sass         .sass .scss
-"    --[no]scala        .scala
-"    --[no]scheme       .scm .ss
-"    --[no]shell        .sh .bash .csh .tcsh .ksh .zsh .fish; first line matches /^#!.*\b(?:ba|t?c|k|z|fi)?sh\b/
-"    --[no]smalltalk    .st
-"    --[no]sql          .sql .ctl
-"    --[no]tcl          .tcl .itcl .itk
-"    --[no]tex          .tex .cls .sty
-"    --[no]textile      .textile
-"    --[no]tt           .tt .tt2 .ttml
-"    --[no]vb           .bas .cls .frm .ctl .vb .resx
-"    --[no]verilog      .v .vh .sv
-"    --[no]vhdl         .vhd .vhdl
-"    --[no]vim          .vim
-"    --[no]xml          .xml .dtd .xsl .xslt .ent; first line matches /<[?]xml/
-"    --[no]yaml         .yaml .yml
 
 Plugin 'mileszs/ack.vim'
 Plugin 'bling/vim-bufferline'
-Plugin 'scrooloose/syntastic'
-Plugin 'chrisbra/csv.vim'
-Plugin 'vim-scripts/lookupfile'
 Plugin 'klen/python-mode'
 
 "Comment stuff out. Use gcc to comment out a line (takes a count), 
@@ -335,9 +260,6 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'Shougo/neocomplete.vim'
 Plugin 'bling/vim-airline'
 
-
-
-
 "## How to Use nerdtree-ack
 "
 "1. Open NERDtree
@@ -358,19 +280,10 @@ Plugin 'bling/vim-airline'
 Plugin 'tyok/nerdtree-ack'
 "
 
-" Plugin 'tpope/vim-rails.git'
-" The sparkup vim script is in a subdirectory of this repo called vim.
-" Pass the path to set the runtimepath properly.
-" Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" scripts from http://vim-scripts.org/vim/scripts.html
-" Plugin 'FuzzyFinder'
-Plugin 'L9'
-Plugin 'genutils'
-Plugin 'Dfrankutil'
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+call vundle#end()
 
 " scripts not on GitHub
 " Plugin 'git://git.wincent.com/command-t.git'
@@ -421,6 +334,9 @@ set autoindent
 set fdm=syntax
 set nofoldenable
 set tabstop=4
+syntax enable
+set background=dark
+colorscheme solarized
 
 set guifont=Monaco:h14
 
@@ -494,107 +410,6 @@ endfunction
 nmap ,a :call SwitchSourceHeader()<CR>
 
 
-
-
-function! GetPathDirs()
-	let dirs = {}                                                                                     
-	let dirlist = []
-
-	let g:pathdirs = split(&path, ",")                                                                
-	for path in g:pathdirs
-
-		if path =="\." || path == "\.\." || path == " " || path == ""
-			continue
-		endif
-
-		let deldir = " "
-		let delpath = " " 
-		for dir in dirlist
-			if match(path, dir) > -1 
-				let delpath=path
-			endif
-
-			if match(dir, path) > -1
-				let deldir=dir
-			endif
-		endfor
-
-		if deldir !~ " "
-			call remove(dirlist, deldir)
-			call add(dirlist, path)
-		endif
-
-		if delpath =~ " "
-			call add(dirlist, path)
-		endif
-
-	endfor
-	let g:pathlist= join(dirlist, ' ')  
-	return g:pathlist 
-endfunction
-
-
-
-let g:Pattern = ['h', 'c', 'cpp', 'cxx', 'hpp', 'hxx']
-
-" Find file in current directory and edit it.
-function! DoFindInPath(...)
-    let g:pathlist=&path
-	let g:pathlist=substitute(g:pathlist, ",", " ", "g")
-	let g:pathlist = GetPathDirs()
-
-    let g:query="\"*".a:1."*\.[".join(g:Pattern,'|')."]\""
-
-	let options = " -type f -iname "
-
-    let g:args="find -H ".g:pathlist.options.g:query
-
-    let g:list=system(g:args)
-
-    let l:num=strlen(substitute(g:list, "[^\n]", "", "g"))
-
-    if l:num < 1
-        echo "'".g:query."' not found"
-        return
-    endif
-
-    "if l:num == 1
-    "    exe "open " . substitute(g:list, "\n", "", "g")
-    "else
-        let tmpfile = tempname()
-        exe "redir! > " . tmpfile
-        silent echon g:list
-        redir END
-        let old_efm = &efm
-        set efm=%f
-
-        if exists(":cgetfile")
-            execute "silent! cgetfile " . tmpfile
-        else
-            execute "silent! cfile " . tmpfile
-        endif
-
-        let &efm = old_efm
-
-        " Open the quickfix window below the current window
-        botright copen
-
-        call delete(tmpfile)
-   " endif
-endfunction
-
-command! -nargs=* FindInPath :call DoFindInPath(<f-args>)
-map ,f  :FindInPath <C-R><C-W> <CR>
-
-
-function! <sid>DoGrepInPath(pattern)
-	let g:filesToGrep = GetPathDirs()
-	execute "Ack! --ignore-dir=xt --nofollow --nomatlab --cc --make --cpp ".a:pattern." ".g:filesToGrep
-endfunction
-
-
-command! -bang -nargs=* -complete=file GrepInPath  call <sid>DoGrepInPath(<q-args>)
-map ,v  :GrepInPath <C-R><C-W> <CR>
 
 
 
@@ -750,23 +565,6 @@ let g:EasyMotion_smartcase = 1
 
 
 
-
-" 
-"
-" 
-"
-" control to toggle full screen mode
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"function! ToggleGUICruft()
-"  if &guioptions=='i'
-"    exec('set guioptions=imTrL')
-"  else
-"    exec('set guioptions=im')
-"  endif
-"endfunction
-"
-"map <F11> <Esc>:call ToggleGUICruft()<cr>
-"
 "" by default, hide gui menus
 set guioptions=im
 
