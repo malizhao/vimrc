@@ -22,7 +22,7 @@ filetype off                  " required
 "call vundle#begin()
 " windows
 set rtp+=$HOME/.vim/bundle/Vundle.vim/
-call vundle#begin('$HOME/.vim/bundle/Vundle.vim/')
+call vundle#begin('$HOME/.vim/bundle/')
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
@@ -50,8 +50,6 @@ Plugin 'VundleVim/Vundle.vim'
 "Add %{fugitive#statusline()} to 'statusline' to get an indicator with the current branch in (surprise!) your statusline.
 "Last but not least, there's :Git for running any arbitrary command, and Git! to open the output of a command in a temp file.
 Plugin 'tpope/vim-fugitive'
-
-
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'altercation/vim-colors-solarized.git'
 Plugin 'scrooloose/nerdtree'
@@ -207,16 +205,6 @@ Plugin 'vim-scripts/taglist.vim'
 Plugin 'mileszs/ack.vim'
 
 
-map <C-H> <Plug>(wintabs_previous)
-map <C-L> <Plug>(wintabs_next)
-map <C-T>c <Plug>(wintabs_close)
-map <C-T>o <Plug>(wintabs_only)
-map <C-W>c <Plug>(wintabs_close_window)
-map <C-W>o <Plug>(wintabs_only_window)
-command! Tabc WintabsCloseVimtab
-command! Tabo WintabsOnlyVimtab
-
-Plugin 'zefei/vim-wintabs'
 Plugin 'klen/python-mode'
 
 "Comment stuff out. Use gcc to comment out a line (takes a count), 
@@ -243,16 +231,7 @@ Plugin 'amix/open_file_under_cursor.vim'
 ":NRL     - Reselect the last selected region and open it again in a narrowed window
 Plugin 'chrisbra/NrrwRgn'
 
-"Press <F5> to purge the cache for the current directory to get new files, remove deleted files and apply new ignore options.
-"Press <c-f> and <c-b> to cycle between modes.
-"Press <c-d> to switch to filename only search instead of full path.
-"Press <c-r> to switch to regexp mode.
-"Use <c-j>, <c-k> or the arrow keys to navigate the result list.
-"Use <c-t> or <c-v>, <c-x> to open the selected entry in a new tab or in a new split.
-"Use <c-n>, <c-p> to select the next/previous string in the prompt's history.
-"Use <c-y> to create a new file and its parent directories.
-"Use <c-z> to mark/unmark multiple files and <c-o> to open them.
-Plugin 'kien/ctrlp.vim'
+Plugin 'vim-ctrlspace/vim-ctrlspace'
 
 
 
@@ -270,27 +249,8 @@ Plugin 'kien/ctrlp.vim'
 "		Note: This command also enables neocomplete if it is disabled.
 "
 Plugin 'Shougo/neocomplete.vim'
-Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline'
 
-"## How to Use nerdtree-ack
-"
-"1. Open NERDtree
-"2. Point to a directory
-"3. Press `ms`
-"4. Enter search term (e.g. `control\ panel -i`)
-"5. Profit!
-"
-"## Features
-"
-"1. Doesn't change current open buffers! This feature is what necessitate the use of latest ack.vim
-"2. Uses ack.vim syntax:
-"    - Use `\ ` to write a space (e.g. `control\ panel`)
-"    - Or enclose the term in quotes (e.g. `"control panel"`)
-"    - The default behavior is case sensitive. Use `-i` params for case insensitive (e.g. `"control panel" -i`)
-"3. Uses ack.vim buffer behavior
-"
-Plugin 'tyok/nerdtree-ack'
-"
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -349,8 +309,9 @@ set tabstop=4
 syntax enable
 set background=dark
 colorscheme solarized
-
-set guifont=Monaco:h10
+set nocompatible
+set hidden
+set guifont=consolas:h11
 
 " Maps Alt-[h,j,k,l] to resizing a window split
 map <C-h> <C-w><
@@ -445,22 +406,12 @@ let g:ctrlp_match_window = 'results:100'
 "
 " configure airline
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"let g:airline#extensions#default#layout = [
-"      \ [ 'a', 'b', 'c' ],
-"      \ [ 'x', 'y', 'z', 'warning' ]
-"      \ ]
-let g:airline#extensions#whitespace#checks = [ ]
-let g:airline#extensions#bufferline#enabled = 0
-
-
-" 
-"
-" configure vim bufferline
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"let g:bufferline_echo = 0
-"autocmd VimEnter *
-"   \ let &statusline='%{bufferline#refresh_status()}'
-"   \ .bufferline#get_status_string()
+let g:airline#extensions#default#layout = [
+      \ [ 'a', 'b', 'c' ],
+      \ [ 'x', 'y', 'z', 'warning' ]
+      \ ]
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#buffer_idx_mode = 1
 
 " 
 "
@@ -509,15 +460,7 @@ let Tlist_Sort_Type = "name"
 
 
 
-
-"
-"
-"
-" Configure indexer
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:indexer_useSedWhenAppend = 1
-let g:indexer_debugLogLevel = 3
-
+let g:gutentags_project_root = [".prjbase"]
 
 
 
