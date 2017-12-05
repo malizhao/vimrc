@@ -22,7 +22,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 " windows
 "set rtp+=$HOME/.vim/bundle/Vundle.vim/
-"call vundle#begin('$HOME/.vim/bundle/Vundle.vim/')
+"call vundle#begin('$HOME/.vim/bundle/')
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
