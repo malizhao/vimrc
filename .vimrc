@@ -1,7 +1,5 @@
 " First, clone vundle
-" git clone https://github.com//VundleVim/Vundle.vim.git ~/.vim/bundle/vundle
-" or
-" git clone https://github.com/VundleVim/Vundle.vim.git bundle
+" git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 "
 "
 " You should first install perl ack, refer beyondgrep.com
@@ -15,10 +13,28 @@
 "
 "
 set nocompatible              " be iMproved, required
+set nu
+set nocp
+set ruler
+set nowrap
+set hlsearch
+set shiftwidth=4 
+set incsearch
+set ignorecase
+set autoindent
+set fdm=syntax
+set nofoldenable
+set tabstop=4
+set encoding=utf-8
+syntax enable
+"set background=dark
+"colorscheme solarized
+set hidden
+"set guifont=Monaco:h14
 filetype off                  " required
 
 " linux
-set rtp+=~/.vim/bundle/Vundle.vim
+set rtp+=~/.vim/bundle/Vundle.vim/
 call vundle#begin()
 " windows
 "set rtp+=$HOME/.vim/bundle/Vundle.vim/
@@ -51,7 +67,7 @@ Plugin 'VundleVim/Vundle.vim'
 "Last but not least, there's :Git for running any arbitrary command, and Git! to open the output of a command in a temp file.
 Plugin 'tpope/vim-fugitive'
 Plugin 'Lokaltog/vim-easymotion'
-Plugin 'altercation/vim-colors-solarized.git'
+"Plugin 'altercation/vim-colors-solarized.git'
 Plugin 'scrooloose/nerdtree'
 Plugin 'ludovicchabant/vim-gutentags'
 Plugin 'vim-scripts/taglist.vim'
@@ -204,9 +220,9 @@ Plugin 'vim-scripts/taglist.vim'
 "
 
 Plugin 'mileszs/ack.vim'
-
-
 Plugin 'klen/python-mode'
+
+Plugin 'ctrlpvim/ctrlp.vim'
 
 "Comment stuff out. Use gcc to comment out a line (takes a count), 
 " gc to comment out the target of a motion (for example, gcap to comment out a paragraph), 
@@ -232,87 +248,19 @@ Plugin 'amix/open_file_under_cursor.vim'
 ":NRL     - Reselect the last selected region and open it again in a narrowed window
 Plugin 'chrisbra/NrrwRgn'
 
-Plugin 'vim-ctrlspace/vim-ctrlspace'
-
-
-
-":NeoCompleteEnable				*:NeoCompleteEnable*
-"		Validate neocomplete and initialize it.
-"		Warning: Existing cache disappears.
-"
-":NeoCompleteDisable				*:NeoCompleteDisable*
-"		Invalidate neocomplete and clean it up.
-"
-":NeoCompleteToggle				*:NeoCompleteToggle*
-"		Change the lock/unlock state of neocomplete.
-"		While neocomplete is in locking, you cannot use automatic
-"		completions.
-"		Note: This command also enables neocomplete if it is disabled.
-"
-Plugin 'Shougo/neocomplete.vim'
 Plugin 'vim-airline/vim-airline'
-
+Plugin 'vim-airline/vim-airline-themes'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-
 call vundle#end()
 
-" scripts not on GitHub
-" Plugin 'git://git.wincent.com/command-t.git'
-" git repos on your local machine (i.e. when working on your own plugin)
-" Plugin 'file:///home/gmarik/path/to/plugin'
-" ...
 
-filetype plugin indent on     " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList          - list configured plugins
-" :PluginInstall(!)    - install (update) plugins
-" :PluginSearch(!) foo - search (or refresh cache first) for foo
-" :PluginClean(!)      - confirm (or auto-approve) removal of unused plugins
-"
-" see :h vundle for more details or wiki for FAQ
-" NOTE: comments after Plugin commands are not allowed.
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-
-
-"
-"
-"
-"
-"
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Put your stuff after this line
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " My own config
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-set nu
-set nocp
-set ruler
-set nowrap
-set hlsearch
-set shiftwidth=4 
-set incsearch
-set ignorecase
-set autoindent
-set fdm=syntax
-set nofoldenable
-set tabstop=4
-syntax enable
-set background=dark
-colorscheme solarized
-set nocompatible
-set hidden
-set guifont=Monaco:h14
 
 " Maps Alt-[h,j,k,l] to resizing a window split
 map <C-h> <C-w><
@@ -351,7 +299,7 @@ map ,gp  "+gP
 map ,{  <i{
 map ,}  >i{
 
-
+ 
 
 " subsititue
 map ,s  yiw:%s/\<<C-R>0\>/
@@ -367,9 +315,6 @@ map <C-[> <C-W>g}
 " close preview window
 map ,q  <C-W>z
 
-"set tags+=tags;/
-filetype plugin on
-set backspace=2
 
 
 function! SwitchSourceHeader()
@@ -397,60 +342,22 @@ nmap ,a :call SwitchSourceHeader()<CR>
 
 " 
 "
-" configure ctrlp
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:ctrlp_extensions = ['tag', 'dir']
-let g:ctrlp_cmd = 'CtrlPTag'
-let g:ctrlp_match_window = 'results:100'
-
-" 
-"
 " configure airline
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"let g:airline_theme = 'light'
 let g:airline#extensions#default#layout = [
-      \ [ 'a', 'b', 'c' ],
-      \ [ 'x', 'y', 'z', 'warning' ]
-      \ ]
+    \ [ 'a', 'b', 'c' ],
+    \ [ 'x', 'y', 'z', ]
+    \ ]
+
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#buffer_idx_mode = 1
+let g:airline#extensions#tabline#show_splits = 0
+let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+let g:airline#extensions#tabline#fnamemod = ':p:t'
+let g:airline#extensions#tabline#show_buffers = 1
+let g:airline#extensions#tabline#show_tabs = 1
 
-" 
-"
-" configure colors-solarized
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-syntax enable
-
-if has("gui_running")
-  " GUI is running or is about to start.
-	colorscheme solarized
-	set background=dark
-	"set background=light
-	"let g:solarized_termcolors=256
-else
-  " This is console Vim.
-endif
-
-
-
-
-" 
-"
-" configure python_mode
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:pymode_lint_checkers = ['pyflakes', 'mccabe'] 
-
-
-
-" 
-"
-" configure syntastic
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:syntastic_mode_map = {
-        \ "mode": "active",
-        \ "active_filetypes": [],
-        \ "passive_filetypes": ["py"] }
-
-let g:syntastic_quiet_messages = { "regex" : 'file not found' }
 " 
 "
 " configure taglist
@@ -462,6 +369,7 @@ let Tlist_Sort_Type = "name"
 
 
 let g:gutentags_project_root = [".prjbase"]
+let g:ctrlp_root_markers = [".prjbase"]
 
 
 
@@ -476,20 +384,6 @@ let g:NERDTreeWinPos = "right"
 
 
 
-" 
-"
-" configure neocomplete
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Note: This option must set it in .vimrc(_vimrc).
-" NOT IN .gvimrc(_gvimrc)!
-" Disable AutoComplPop.
-let g:acp_enableAtStartup = 0
-" Use neocomplete.
-let g:neocomplete#enable_at_startup = 1
-" Use smartcase.
-let g:neocomplete#enable_smart_case = 1
-" Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 3
 
 
 " 
@@ -516,13 +410,6 @@ let g:EasyMotion_smartcase = 1
 " JK motions: Line motions
 " map <Leader>j <Plug>(easymotion-j)
 " map <Leader>k <Plug>(easymotion-k)
-
-
-
-
-
-"" by default, hide gui menus
-set guioptions=im
 
 
 
