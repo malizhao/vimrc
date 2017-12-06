@@ -1,6 +1,11 @@
 " First, clone vundle
 " git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 "
+"On an Ubuntu or Debian machine, this is as simple as installing the utility
+"from the default repositories. The package is called ack-grep:
+"
+"sudo apt-get update
+"sudo apt-get install ack-grep
 "
 " You should first install perl ack, refer beyondgrep.com
 " to install choco, do this in power shell: Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
@@ -317,17 +322,18 @@ map ,q  <C-W>z
 
 
 
-function! SwitchSourceHeader()
-  "update!
-  if (expand ("%:e") == "c")
-    find %:t:r.h
-  else
-    find %:t:r.c
-  endif
-endfunction
-
-nmap ,a :call SwitchSourceHeader()<CR>
-
+"function! SwitchSourceHeader()
+"  "update!
+"  if (expand("%:e") == "c")
+"    tag <C-R>=expand("%:t:r") . ".h" <CR> <CR>
+"  else
+"    tag <C-R>=expand("%:t:r") . ".c" <CR> <CR>
+"  endif
+"endfunction
+"
+"map ,a :call SwitchSourceHeader()<CR>
+map ,c :tag <C-R>=expand("%:t:r") . ".c" <CR> <CR>
+map ,h :tag <C-R>=expand("%:t:r") . ".h" <CR> <CR>
 
 
 
@@ -390,26 +396,9 @@ let g:NERDTreeWinPos = "right"
 "
 " configure easy montion
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 let g:EasyMotion_leader_key = '<SPACE>'
-
-" let g:EasyMotion_do_mapping = 0 " Disable default mappings
-
-" Bi-directional find motion
-" Jump to anywhere you want with minimal keystrokes, with just one key binding.
-" `s{char}{label}`
-" nmap s <Plug>(easymotion-s)
-" or
-" `s{char}{char}{label}`
-" Need one more keystroke, but on average, it may be more comfortable.
-" nmap s <Plug>(easymotion-s2)
-
 " Turn on case sensitive feature
 let g:EasyMotion_smartcase = 1
-
-" JK motions: Line motions
-" map <Leader>j <Plug>(easymotion-j)
-" map <Leader>k <Plug>(easymotion-k)
 
 
 
