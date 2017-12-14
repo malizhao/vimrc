@@ -18,8 +18,8 @@
 "
 "
 set nocompatible              " be iMproved, required
+set backspace=indent,eol,start
 set nu
-set nocp
 set ruler
 set nowrap
 set hlsearch
@@ -39,11 +39,11 @@ set hidden
 filetype off                  " required
 
 " linux
-set rtp+=~/.vim/bundle/Vundle.vim/
-call vundle#begin()
+"set rtp+=~/.vim/bundle/Vundle.vim
+"call vundle#begin()
 " windows
-"set rtp+=$HOME/.vim/bundle/Vundle.vim/
-"call vundle#begin('$HOME/.vim/bundle/')
+set rtp+=$HOME/.vim/bundle/Vundle.vim/
+call vundle#begin('$HOME/.vim/bundle/')
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
@@ -71,11 +71,18 @@ Plugin 'VundleVim/Vundle.vim'
 "Add %{fugitive#statusline()} to 'statusline' to get an indicator with the current branch in (surprise!) your statusline.
 "Last but not least, there's :Git for running any arbitrary command, and Git! to open the output of a command in a temp file.
 Plugin 'tpope/vim-fugitive'
+
+"core plugin, easy motion
 Plugin 'Lokaltog/vim-easymotion'
 "Plugin 'altercation/vim-colors-solarized.git'
+"core plugin, for show directory
 Plugin 'scrooloose/nerdtree'
+"core plugin, for generate tags
 Plugin 'ludovicchabant/vim-gutentags'
 Plugin 'vim-scripts/taglist.vim'
+
+Plugin 'morhetz/gruvbox'
+
 "
 "
 "Usage: ack [OPTION]... PATTERN [FILES OR DIRECTORIES]
@@ -223,8 +230,10 @@ Plugin 'vim-scripts/taglist.vim'
 "specify a file type with the --type=TYPE format, or the --TYPE
 "format.  For example, both --type=perl and --perl work.
 "
-
 Plugin 'mileszs/ack.vim'
+
+
+Plugin 'vim-ctrlspace/vim-ctrlspace'
 Plugin 'klen/python-mode'
 
 Plugin 'ctrlpvim/ctrlp.vim'
@@ -266,7 +275,8 @@ call vundle#end()
 " My own config
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-
+set nocompatible
+set hidden
 " Maps Alt-[h,j,k,l] to resizing a window split
 map <C-h> <C-w><
 map <C-j> <C-W>+
@@ -402,4 +412,5 @@ let g:EasyMotion_smartcase = 1
 
 
 
+colorscheme gruvbox
 
