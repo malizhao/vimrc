@@ -1,16 +1,7 @@
 " First, clone vundle
 " git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 "
-"On an Ubuntu or Debian machine, this is as simple as installing the utility
-"from the default repositories. The package is called ack-grep:
-"
-"sudo apt-get update
-"sudo apt-get install ack-grep
-"
-" You should first install perl ack, refer beyondgrep.com
-" to install choco, do this in power shell: Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
-" then "choco install ack", to install ack
-"
+" install global
 "
 " Note in windows, CTRL-V is paste, use CTRL-Q instead.
 "
@@ -31,19 +22,15 @@ set fdm=syntax
 set nofoldenable
 set tabstop=4
 set encoding=utf-8
-syntax enable
-"set background=dark
-"colorscheme solarized
 set hidden
-"set guifont=Monaco:h14
 filetype off                  " required
 
 " linux
-"set rtp+=~/.vim/bundle/Vundle.vim
-"call vundle#begin()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 " windows
-set rtp+=$HOME/.vim/bundle/Vundle.vim/
-call vundle#begin('$HOME/.vim/bundle/')
+"set rtp+=$HOME/.vim/bundle/Vundle.vim/
+"call vundle#begin('$HOME/.vim/bundle/')
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
@@ -79,164 +66,48 @@ Plugin 'Lokaltog/vim-easymotion'
 Plugin 'scrooloose/nerdtree'
 "core plugin, for generate tags
 Plugin 'ludovicchabant/vim-gutentags'
+
+"0 or s: Find this symbol
+"1 or g: Find this definition
+"2 or d: Find functions called by this function
+"3 or c: Find functions calling this function
+"4 or t: Find this text string
+"6 or e: Find this egrep pattern
+"7 or f: Find this file
+"8 or i: Find files #including this file
+"9 or a: Find places where this symbol is assigned a value
+"<leader>cs	Find symbol (reference) under cursor
+"<leader>cg	Find symbol definition under cursor
+"<leader>cd	Functions called by this function
+"<leader>cc	Functions calling this function
+"<leader>ct	Find text string under cursor
+"<leader>ce	Find egrep pattern under cursor
+"<leader>cf	Find file name under cursor
+"<leader>ci	Find files #including the file name under cursor
+"<leader>ca	Find places where current symbol is assigned
+Plugin 'skywind3000/gutentags_plus'
+
 Plugin 'vim-scripts/taglist.vim'
-
 Plugin 'morhetz/gruvbox'
+"Plugin 'joshdick/onedark.vim'
+"
+"
 
-"
-"
-"Usage: ack [OPTION]... PATTERN [FILES OR DIRECTORIES]
-"
-"Search for PATTERN in each source file in the tree from the current
-"directory on down.  If any files or directories are specified, then
-"only those files and directories are checked.  ack may also search
-"STDIN, but only if no file or directory arguments are specified,
-"or if one of them is "-".
-"
-"Default switches may be specified in ACK_OPTIONS environment variable or
-"an .ackrc file. If you want no dependency on the environment, turn it
-"off with --noenv.
-"
-"Example: ack -i select
-"
-"Searching:
-"  -i, --ignore-case             Ignore case distinctions in PATTERN
-"  --[no]smart-case              Ignore case distinctions in PATTERN,
-"                                only if PATTERN contains no upper case.
-"                                Ignored if -i is specified
-"  -v, --invert-match            Invert match: select non-matching lines
-"  -w, --word-regexp             Force PATTERN to match only whole words
-"  -Q, --literal                 Quote all metacharacters; PATTERN is literal
-"
-"Search output:
-"  --lines=NUM                   Only print line(s) NUM of each file
-"  -l, --files-with-matches      Only print filenames containing matches
-"  -L, --files-without-matches   Only print filenames with no matches
-"  --output=expr                 Output the evaluation of expr for each line
-"                                (turns off text highlighting)
-"  -o                            Show only the part of a line matching PATTERN
-"                                Same as --output='$&'
-"  --passthru                    Print all lines, whether matching or not
-"  --match PATTERN               Specify PATTERN explicitly.
-"  -m, --max-count=NUM           Stop searching in each file after NUM matches
-"  -1                            Stop searching after one match of any kind
-"  -H, --with-filename           Print the filename for each match (default:
-"                                on unless explicitly searching a single file)
-"  -h, --no-filename             Suppress the prefixing filename on output
-"  -c, --count                   Show number of lines matching per file
-"  --[no]column                  Show the column number of the first match
-"
-"  -A NUM, --after-context=NUM   Print NUM lines of trailing context after
-"                                matching lines.
-"  -B NUM, --before-context=NUM  Print NUM lines of leading context before
-"                                matching lines.
-"  -C [NUM], --context[=NUM]     Print NUM lines (default 2) of output context.
-"
-"  --print0                      Print null byte as separator between filenames,
-"                                only works with -f, -g, -l, -L or -c.
-"
-"  -s                            Suppress error messages about nonexistent or
-"                                unreadable files.
-"
-"
-"File presentation:
-"  --pager=COMMAND               Pipes all ack output through COMMAND.  For
-"                                example, --pager="less -R".  Ignored if output
-"                                is redirected.
-"  --nopager                     Do not send output through a pager.  Cancels
-"                                any setting in ~/.ackrc, ACK_PAGER or
-"                                ACK_PAGER_COLOR.
-"  --[no]heading                 Print a filename heading above each file's
-"                                results.  (default: on when used interactively)
-"  --[no]break                   Print a break between results from different
-"                                files.  (default: on when used interactively)
-"  --group                       Same as --heading --break
-"  --nogroup                     Same as --noheading --nobreak
-"  --[no]color                   Highlight the matching text (default: on unless
-"                                output is redirected, or on Windows)
-"  --[no]colour                  Same as --[no]color
-"  --color-filename=COLOR
-"  --color-match=COLOR
-"  --color-lineno=COLOR          Set the color for filenames, matches, and line
-"                                numbers.
-"  --flush                       Flush output immediately, even when ack is used
-"                                non-interactively (when output goes to a pipe or
-"                                file).
-"
-"
-"File finding:
-"  -f                            Only print the files selected, without
-"                                searching.  The PATTERN must not be specified.
-"  -g                            Same as -f, but only select files matching
-"                                PATTERN.
-"  --sort-files                  Sort the found files lexically.
-"  --show-types                  Show which types each file has.
-"  --files-from=FILE             Read the list of files to search from FILE.
-"  -x                            Read the list of files to search from STDIN.
-"
-"File inclusion/exclusion:
-"  --[no]ignore-dir=name         Add/remove directory from list of ignored dirs
-"  --[no]ignore-directory=name   Synonym for ignore-dir
-"  --ignore-file=filter          Add filter for ignoring files
-"  -r, -R, --recurse             Recurse into subdirectories (default: on)
-"  -n, --no-recurse              No descending into subdirectories
-"  --[no]follow                  Follow symlinks.  Default is off.
-"  -k, --known-types             Include only files of types that ack recognizes.
-"
-"  --type=X                      Include only X files, where X is a recognized
-"                                filetype.
-"  --type=noX                    Exclude X files.
-"                                See "ack --help-types" for supported filetypes.
-"
-"File type specification:
-"  --type-set TYPE:FILTER:FILTERARGS
-"                                Files with the given FILTERARGS applied to the
-"                                given FILTER are recognized as being of type
-"                                TYPE. This replaces an existing definition for
-"                                type TYPE.
-"  --type-add TYPE:FILTER:FILTERARGS
-"                                Files with the given FILTERARGS applied to the
-"                                given FILTER are recognized as being type TYPE.
-"  --type-del TYPE               Removes all filters associated with TYPE.
-"
-"
-"Miscellaneous:
-"  --[no]env                     Ignore environment variables and global ackrc
-"                                files.  --env is legal but redundant.
-"  --ackrc=filename              Specify an ackrc file to use
-"  --ignore-ack-defaults         Ignore default definitions included with ack.
-"  --create-ackrc                Outputs a default ackrc for your customization
-"                                to standard output.
-"  --help, -?                    This help
-"  --help-types                  Display all known types
-"  --dump                        Dump information on which options are loaded
-"                                from which RC files
-"  --[no]filter                  Force ack to treat standard input as a pipe
-"                                (--filter) or tty (--nofilter)
-"  --man                         Man page
-"  --version                     Display version & copyright
-"  --thpppt                      Bill the Cat
-"  --bar                         The warning admiral
-"  --cathy                       Chocolate! Chocolate! Chocolate!
-"
-"Exit status is 0 if match, 1 if no match.
-"
-"This is version 2.12 of ack.
-"ack's file types (ack --help-types)
-"
-" Usage: ack [OPTION]... PATTERN [FILES OR DIRECTORIES]
-"
-"The following is the list of filetypes supported by ack.  You can
-"specify a file type with the --type=TYPE format, or the --TYPE
-"format.  For example, both --type=perl and --perl work.
-"
-Plugin 'mileszs/ack.vim'
-
-
+"| Key | Action                                                |
+"| --- | ----------------------------------------------------- |
+"| `h`   | Toggle Buffer List (aka `H`ome List)                    |
+"| `H`   | Jump to Buffer List (aka `H`ome List) with Search Mode  |
+"| `o`   | Toggle File List (aka `O`pen List)                      |
+"| `O`   | Jump to File List (aka `O`pen List) with Search Mode    |
+"| `l`   | Toggle Tab List (aka `L`ists List)                      |
+"| `L`   | Jump to Tab List (aka `L`ists List) with Search Mode    |
+"| `w`   | Toggle `W`orkspace List                                 |
+"| `W`   | Jump to `W`orkspace List with Search Mode               |
+"| `b`   | Toggle `B`ookmark List                                  |
+"| `B`   | Jump to `B`ookmark List with Search Mode                |
 Plugin 'vim-ctrlspace/vim-ctrlspace'
-Plugin 'klen/python-mode'
 
-Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'python-mode/python-mode'
 
 "Comment stuff out. Use gcc to comment out a line (takes a count), 
 " gc to comment out the target of a motion (for example, gcap to comment out a paragraph), 
@@ -384,10 +255,14 @@ let Tlist_Sort_Type = "name"
 
 
 
-let g:gutentags_project_root = [".prjbase"]
-let g:ctrlp_root_markers = [".prjbase"]
+"enable gtags module
+let g:gutentags_modules = ['ctags', 'gtags_cscope']
 
+" generate datebases in my cache directory, prevent gtags files polluting my project
+let g:gutentags_cache_dir = expand('~/.cache/tags')
 
+" forbid gutentags adding gtags databases
+let g:gutentags_auto_add_gtags_cscope = 1
 
 
 " 
@@ -409,8 +284,16 @@ let g:NERDTreeWinPos = "right"
 let g:EasyMotion_leader_key = '<SPACE>'
 " Turn on case sensitive feature
 let g:EasyMotion_smartcase = 1
+let g:mapleader = ','
 
 
 
+syntax enable
+syntax on
+"
+set background=dark
 colorscheme gruvbox
+"colorscheme solarized
+"set guifont=Monaco:h14
+"colorscheme onedark
 
