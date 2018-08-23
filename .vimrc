@@ -66,6 +66,7 @@ Plugin 'Lokaltog/vim-easymotion'
 Plugin 'scrooloose/nerdtree'
 "core plugin, for generate tags
 Plugin 'ludovicchabant/vim-gutentags'
+Plugin 'Valloric/YouCompleteMe'
 
 "0 or s: Find this symbol
 "1 or g: Find this definition
@@ -86,7 +87,7 @@ Plugin 'ludovicchabant/vim-gutentags'
 "<leader>ci	Find files #including the file name under cursor
 "<leader>ca	Find places where current symbol is assigned
 Plugin 'skywind3000/gutentags_plus'
-
+Plugin 'derekwyatt/vim-fswitch'
 Plugin 'vim-scripts/taglist.vim'
 Plugin 'morhetz/gruvbox'
 "Plugin 'joshdick/onedark.vim'
@@ -158,7 +159,7 @@ map <C-l> <C-w>>
 map <S-Tab> :bnext<CR>
 
 "return command mode
-imap ,c <ESC>
+map ,c <ESC>
 map  ,c <ESC>
 
 "save file
@@ -203,6 +204,12 @@ map ,q  <C-W>z
 
 
 
+
+map ,ar :FSSplitRight<CR>
+map ,al :FSSplitLeft<CR>
+map ,aa :FSSplitAbove<CR>
+map ,ab :FSSplitBelow<CR>
+
 "function! SwitchSourceHeader()
 "  "update!
 "  if (expand("%:e") == "c")
@@ -213,8 +220,8 @@ map ,q  <C-W>z
 "endfunction
 "
 "map ,a :call SwitchSourceHeader()<CR>
-map ,c :tag <C-R>=expand("%:t:r") . ".c" <CR> <CR>
-map ,h :tag <C-R>=expand("%:t:r") . ".h" <CR> <CR>
+"map ,c :tag <C-R>=expand("%:t:r") . ".c" <CR> <CR>
+"map ,h :tag <C-R>=expand("%:t:r") . ".h" <CR> <CR>
 
 
 
