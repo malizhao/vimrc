@@ -23,6 +23,7 @@ set nofoldenable
 set tabstop=4
 set encoding=utf-8
 set hidden
+set wildignore=*\/obj\/*.o
 filetype off                  " required
 
 " linux
@@ -232,7 +233,7 @@ map ,ab :FSSplitBelow<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Config plugin
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
+let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py'
 
 " 
 "
@@ -265,11 +266,14 @@ let Tlist_Sort_Type = "name"
 "enable gtags module
 let g:gutentags_modules = ['ctags', 'gtags_cscope']
 
+let g:gutentags_file_list_command = 'find . -path "*/src/*" -o -path "*/include/*" -o -path "*/inc/*"'
+
 " generate datebases in my cache directory, prevent gtags files polluting my project
 let g:gutentags_cache_dir = expand('~/.cache/tags')
 
 " forbid gutentags adding gtags databases
-let g:gutentags_auto_add_gtags_cscope = 1
+let g:gutentags_auto_add_gtags_cscope = 0
+let g:gutentags_generate_on_write = 1
 
 
 " 
