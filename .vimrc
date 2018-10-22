@@ -90,8 +90,9 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'skywind3000/gutentags_plus'
 Plugin 'derekwyatt/vim-fswitch'
 Plugin 'vim-scripts/taglist.vim'
-Plugin 'morhetz/gruvbox'
+"Plugin 'morhetz/gruvbox'
 "Plugin 'joshdick/onedark.vim'
+Plugin 'NLKNguyen/papercolor-theme'
 "
 "
 
@@ -303,8 +304,8 @@ syntax enable
 syntax on
 "
 set background=dark
-colorscheme gruvbox
+"colorscheme gruvbox
 "colorscheme solarized
 "set guifont=Monaco:h14
 "colorscheme onedark
-
+colorscheme PaperColor
