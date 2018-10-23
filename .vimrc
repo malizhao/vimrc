@@ -25,6 +25,7 @@ set encoding=utf-8
 set hidden
 set wildignore=*\/obj\/*.o
 filetype off                  " required
+set t_Co=256
 
 " linux
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -90,9 +91,10 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'skywind3000/gutentags_plus'
 Plugin 'derekwyatt/vim-fswitch'
 Plugin 'vim-scripts/taglist.vim'
-"Plugin 'morhetz/gruvbox'
+Plugin 'morhetz/gruvbox'
 "Plugin 'joshdick/onedark.vim'
-Plugin 'NLKNguyen/papercolor-theme'
+"Plugin 'NLKNguyen/papercolor-theme'
+Plugin 'NLKNguyen/c-syntax.vim'
 "
 "
 
@@ -304,8 +306,8 @@ syntax enable
 syntax on
 "
 set background=dark
-"colorscheme gruvbox
+colorscheme gruvbox
 "colorscheme solarized
 "set guifont=Monaco:h14
 "colorscheme onedark
-colorscheme PaperColor
+"colorscheme PaperColor
