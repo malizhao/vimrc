@@ -92,8 +92,9 @@ Plugin 'skywind3000/gutentags_plus'
 Plugin 'derekwyatt/vim-fswitch'
 Plugin 'vim-scripts/taglist.vim'
 Plugin 'morhetz/gruvbox'
-"Plugin 'joshdick/onedark.vim'
-"Plugin 'NLKNguyen/papercolor-theme'
+Plugin 'joshdick/onedark.vim'
+Plugin 'sonph/onehalf', {'rtp': 'vim/'}
+Plugin 'NLKNguyen/papercolor-theme'
 Plugin 'NLKNguyen/c-syntax.vim'
 "
 "
@@ -269,7 +270,7 @@ let Tlist_Sort_Type = "name"
 "enable gtags module
 let g:gutentags_modules = ['ctags', 'gtags_cscope']
 
-let g:gutentags_file_list_command = 'find . -path "*/src/*" -o -path "*/include/*" -o -path "*/inc/*"'
+let g:gutentags_file_list_command = 'find . -path "*/src/*" -o -path "*/include/*" -o -path "*/inc/*" -o -path "*/Samanea/*"'
 
 " generate datebases in my cache directory, prevent gtags files polluting my project
 let g:gutentags_cache_dir = expand('~/.cache/tags')
@@ -310,4 +311,5 @@ colorscheme gruvbox
 "colorscheme solarized
 "set guifont=Monaco:h14
 "colorscheme onedark
+"colorscheme onehalfdark
 "colorscheme PaperColor
