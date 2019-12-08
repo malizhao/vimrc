@@ -1,7 +1,13 @@
 " First, clone vundle
 " git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 "
+" --- requirements:
+"
+" sudo dnf install cmake gcc-c++ make python3-devel
+" https://vimawesome.com/plugin/youcompleteme
+" sudo yum install ncurses-devel
 " install global
+"     https://www.gnu.org/software/global/download.html
 "
 " Note in windows, CTRL-V is paste, use CTRL-Q instead.
 "
@@ -24,8 +30,10 @@ set tabstop=4
 set encoding=utf-8
 set hidden
 set wildignore=*\/obj\/*.o
-filetype off                  " required
+"filetype off                  " required
 set t_Co=256
+
+
 
 " linux
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -42,33 +50,12 @@ Plugin 'VundleVim/Vundle.vim'
 " -----------------------------------------
 " scripts on GitHub repos
 
-"I'm not going to lie to you; fugitive.vim may very well be the best Git wrapper of all time. Check out these features:
-"View any blob, tree, commit, or tag in the repository with :Gedit (and :Gsplit, :Gvsplit, :Gtabedit, ...). 
-"Edit a file in the index and write to it to stage the changes. Use :Gdiff to bring up the staged version of 
-"the file side by side with the working tree version and use Vim's diff handling capabilities to stage a subset of the file's changes.
-"Bring up the output of git status with :Gstatus. Press - to add/reset a file's changes, or p to add/reset --patch. And guess what :Gcommit does!
-":Gblame brings up an interactive vertical split with git blame output. Press enter on a line to edit the commit where the line changed, 
-"or o to open it in a split. When you're done, use :Gedit in the historic buffer to go back to the work tree version.
-":Gmove does a git mv on a file and simultaneously renames the buffer. :Gdelete does a git rm on a file and simultaneously deletes the buffer.
-"Use :Ggrep to search the work tree (or any arbitrary commit) with git grep, skipping over that which is not tracked in the repository. 
-":Glog loads all previous revisions of a file into the quickfix list so you can iterate over them and watch the file evolve!
-":Gread is a variant of git checkout -- filename that operates on the buffer rather than the filename. This means you can use u 
-"to undo it and you never get any warnings about the file changing outside Vim. :Gwrite writes to both the work tree and index 
-"versions of a file, making it like git add when called from a work tree file and like git checkout when called from the index or a blob in history.
-"Use :Gbrowse to open the current file on the web front-end of your favorite hosting provider, with optional line range 
-"(try it in visual mode!). Built-in support is provided for git instaweb, and plugins are available for popular providers such as GitHub, GitLab, and Bitbucket.
-"Add %{fugitive#statusline()} to 'statusline' to get an indicator with the current branch in (surprise!) your statusline.
-"Last but not least, there's :Git for running any arbitrary command, and Git! to open the output of a command in a temp file.
-Plugin 'tpope/vim-fugitive'
-
 "core plugin, easy motion
 Plugin 'Lokaltog/vim-easymotion'
-"Plugin 'altercation/vim-colors-solarized.git'
-"core plugin, for show directory
 Plugin 'scrooloose/nerdtree'
-"core plugin, for generate tags
+Plugin 'vim-scripts/taglist.vim'
 Plugin 'ludovicchabant/vim-gutentags'
-Plugin 'Valloric/YouCompleteMe'
+Plugin 'python-mode/python-mode'
 
 "0 or s: Find this symbol
 "1 or g: Find this definition
@@ -89,31 +76,10 @@ Plugin 'Valloric/YouCompleteMe'
 "<leader>ci	Find files #including the file name under cursor
 "<leader>ca	Find places where current symbol is assigned
 Plugin 'skywind3000/gutentags_plus'
+
+Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'derekwyatt/vim-fswitch'
-Plugin 'vim-scripts/taglist.vim'
-Plugin 'morhetz/gruvbox'
-Plugin 'joshdick/onedark.vim'
-Plugin 'sonph/onehalf', {'rtp': 'vim/'}
-Plugin 'NLKNguyen/papercolor-theme'
-Plugin 'NLKNguyen/c-syntax.vim'
-"
-"
-
-"| Key | Action                                                |
-"| --- | ----------------------------------------------------- |
-"| `h`   | Toggle Buffer List (aka `H`ome List)                    |
-"| `H`   | Jump to Buffer List (aka `H`ome List) with Search Mode  |
-"| `o`   | Toggle File List (aka `O`pen List)                      |
-"| `O`   | Jump to File List (aka `O`pen List) with Search Mode    |
-"| `l`   | Toggle Tab List (aka `L`ists List)                      |
-"| `L`   | Jump to Tab List (aka `L`ists List) with Search Mode    |
-"| `w`   | Toggle `W`orkspace List                                 |
-"| `W`   | Jump to `W`orkspace List with Search Mode               |
-"| `b`   | Toggle `B`ookmark List                                  |
-"| `B`   | Jump to `B`ookmark List with Search Mode                |
-Plugin 'vim-ctrlspace/vim-ctrlspace'
-
-Plugin 'python-mode/python-mode'
+Plugin 'ycm-core/YouCompleteMe'
 
 "Comment stuff out. Use gcc to comment out a line (takes a count), 
 " gc to comment out the target of a motion (for example, gcap to comment out a paragraph), 
@@ -122,25 +88,28 @@ Plugin 'python-mode/python-mode'
 " or as part of a :global invocation like with :g/TODO/Commentary. That's it."
 Plugin 'tpope/vim-commentary'
 
-" nnoremap gf :call GotoFile("")<CR>
-" nnoremap <C-W>f :call GotoFile("new")<CR>
-" nnoremap <C-W><C-F> :call GotoFile("new")<CR>
-Plugin 'amix/open_file_under_cursor.vim'
 
-":NR      - Open the selected region in a new narrowed window
-":NW      - Open the current visual window in a new narrowed window
-":WidenRegion - (In the narrowed window) write the changes back to the original buffer.
-":NRV     - Open the narrowed window for the region that was last visually selected.
-":NUD     - (In a unified diff) open the selected diff in 2 Narrowed windows
-":NRP     - Mark a region for a Multi narrowed window
-":NRM     - Create a new Multi narrowed window (after :NRP)
-":NRS     - Enable Syncing the buffer content back (default on)
-":NRN     - Disable Syncing the buffer content back
-":NRL     - Reselect the last selected region and open it again in a narrowed window
-Plugin 'chrisbra/NrrwRgn'
+
+
+Plugin 'NLKNguyen/papercolor-theme'
+Plugin 'cocopon/iceberg.vim'
+Plugin 'arcticicestudio/nord-vim'
+Plugin 'rakr/vim-one'
 
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
+" Plugin 'NLKNguyen/c-syntax.vim'
+"
+
+
+
+
+
+
+Plugin 'amix/open_file_under_cursor.vim'
+nnoremap gf :call GotoFile("")<CR>
+nnoremap <C-W>f :call GotoFile("new")<CR>
+nnoremap <C-W><C-F> :call GotoFile("new")<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 call vundle#end()
@@ -165,7 +134,6 @@ map <S-Tab> :bnext<CR>
 
 "return command mode
 map ,c <ESC>
-map  ,c <ESC>
 
 "save file
 imap ,w <ESC>:w<CR>
@@ -237,7 +205,6 @@ map ,ab :FSSplitBelow<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Config plugin
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py'
 
 " 
 "
@@ -270,14 +237,18 @@ let Tlist_Sort_Type = "name"
 "enable gtags module
 let g:gutentags_modules = ['ctags', 'gtags_cscope']
 
-let g:gutentags_file_list_command = 'find . -path "*/src/*" -o -path "*/include/*" -o -path "*/inc/*" -o -path "*/Samanea/*"'
+"let g:gutentags_file_list_command = 'find . -path "*/src/*" -o -path "*/include/*" -o -path "*/inc/*" -o -path "*/Samanea/*"'
 
 " generate datebases in my cache directory, prevent gtags files polluting my project
 let g:gutentags_cache_dir = expand('~/.cache/tags')
 
+" change focus to quickfix window after search (optional).
+let g:gutentags_plus_switch = 1
+
 " forbid gutentags adding gtags databases
 let g:gutentags_auto_add_gtags_cscope = 0
 let g:gutentags_generate_on_write = 1
+set statusline+=%{gutentags#statusline()}
 
 
 " 
@@ -288,6 +259,13 @@ map <F7> :TlistToggle<CR>:NERDTreeToggle<CR>
 let g:NERDTreeWinPos = "right"
 
 
+
+let g:cpp_class_scope_highlight = 1
+let g:cpp_class_scope_highlight = 1
+let g:cpp_class_scope_highlight = 1
+let g:cpp_class_scope_highlight = 1
+let g:cpp_class_scope_highlight = 1
+let g:cpp_class_scope_highlight = 1
 
 
 
@@ -305,11 +283,9 @@ let g:mapleader = ','
 
 syntax enable
 syntax on
-"
 set background=dark
-colorscheme gruvbox
-"colorscheme solarized
-"set guifont=Monaco:h14
-"colorscheme onedark
-"colorscheme onehalfdark
-"colorscheme PaperColor
+" colorscheme gruvbox
+" colorscheme PaperColor
+" colorscheme iceberg
+"colorscheme nord
+colorscheme one 
