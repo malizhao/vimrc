@@ -30,6 +30,7 @@ set tabstop=4
 set encoding=utf-8
 set hidden
 set wildignore=*\/obj\/*.o
+set noea
 "filetype off                  " required
 set t_Co=256
 
@@ -76,10 +77,10 @@ Plugin 'python-mode/python-mode'
 "<leader>ci	Find files #including the file name under cursor
 "<leader>ca	Find places where current symbol is assigned
 Plugin 'skywind3000/gutentags_plus'
-
-Plugin 'octol/vim-cpp-enhanced-highlight'
+Plugin 'bfrg/vim-cpp-modern'
 Plugin 'derekwyatt/vim-fswitch'
 Plugin 'ycm-core/YouCompleteMe'
+Plugin 'junegunn/fzf'
 
 "Comment stuff out. Use gcc to comment out a line (takes a count), 
 " gc to comment out the target of a motion (for example, gcap to comment out a paragraph), 
@@ -94,7 +95,7 @@ Plugin 'tpope/vim-commentary'
 Plugin 'NLKNguyen/papercolor-theme'
 Plugin 'cocopon/iceberg.vim'
 Plugin 'arcticicestudio/nord-vim'
-Plugin 'rakr/vim-one'
+Plugin 'tomasr/molokai'  
 
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
@@ -121,8 +122,6 @@ call vundle#end()
 " My own config
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-set nocompatible
-set hidden
 " Maps Alt-[h,j,k,l] to resizing a window split
 map <C-h> <C-w><
 map <C-j> <C-W>+
@@ -261,11 +260,6 @@ let g:NERDTreeWinPos = "right"
 
 
 let g:cpp_class_scope_highlight = 1
-let g:cpp_class_scope_highlight = 1
-let g:cpp_class_scope_highlight = 1
-let g:cpp_class_scope_highlight = 1
-let g:cpp_class_scope_highlight = 1
-let g:cpp_class_scope_highlight = 1
 
 
 
@@ -287,5 +281,4 @@ set background=dark
 " colorscheme gruvbox
 " colorscheme PaperColor
 " colorscheme iceberg
-"colorscheme nord
-colorscheme one 
+colorscheme molokai 
